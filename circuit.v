@@ -10,8 +10,13 @@ module circuit
    `OUTPUT(y,32)
    );
 
-   `SIGNAL(acc, 32)
-   `ACC_ARE(clk, rst, 1'b0, en, acc, x)
-   `SIGNAL2OUT(y, acc)
+   `SIGNAL(y_ant, 32)
+   `SIGNAL(y_int, 32)
+   `SIGNAL2OUT(y, y_int)
+   
+   `REG_ARE(clk, rst, 1'b0, en, y_ant, y_int)
+
+   `COMB y_int = x + 2*y_ant;
+   
    
 endmodule
